@@ -1,0 +1,18 @@
+sudo docker volume create portainer_data
+
+--Crear Portainer
+sudo docker run -d \
+-p 9443:9443 \
+--name portainer \
+--restart=always \
+--privileged \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v portainer_data:/data \
+portainer/portainer-ce:latest
+
+sudo firewall-cmd --permanent --add-port=9443/tcp
+
+sudo firewall-cmd --reload
+
+--Buscar Tocken
+sudo docker logs portainer
